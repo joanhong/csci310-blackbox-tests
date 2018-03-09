@@ -25,6 +25,31 @@ And(/^the height must be between 35 and 50% of the browser viewport height, but 
 	end
 end
 
+AND (/^the collage should be centered in the page$/) do
+	find('[id=collage]').native.css_value('text-align').should == 'center'
+end
+
+AND (/^the collage should appear under the collage title$/) do
+	collageTitlePos = page.driver.evaluate_script <<-EOS
+		function() {
+			var ele = document.getElementById('title');
+			var rect = ele.getBoundingClientRect();
+			return rect.top;
+		}();
+	EOS
+	collagePos = page.driver.evaluate_script <<-EOS
+		function() {
+			var ele = document.getElementById('main');
+			var rect = ele.getBoundingClientRect();
+			return rect.top;
+		}();
+	EOS
+	
+	if (collageTitlePos < collagePos)
+		puts('PASS');
+	end
+end
+
 When(/^I enter “gsjaflsajjad” in the search box$/) do
 	fill_in('searchtext', :with => 'gsjaflsajjad')
 end
@@ -42,6 +67,5 @@ end
 Then(/^error text size should be 18pt$/) do
   	find('[id=error]').native.css_value('font-size').should == "24px"
 end
-
 
 
