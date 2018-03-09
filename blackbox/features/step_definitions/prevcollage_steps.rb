@@ -25,7 +25,7 @@ Then(/^title should change to "([^']*)"$/) do |arg1|
 end
 
 And(/^the main "([^']*)" collage should be scaled down$/) do |arg1|
-  find('alt=' + arg1 + ']').native.css_value("height").should == "100px"
+  find('img[alt=' + arg1 + ']').native.css_value("height").should == "100px"
 end
 
 And(/^the clicked "([^']*)" collage should be scaled up$/) do
