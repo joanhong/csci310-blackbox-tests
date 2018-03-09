@@ -1,3 +1,7 @@
+Given(/^I am on the initial page$/) do
+	visit "http://localhost:8081/CS310-ProjectOne/index.jsp"
+end
+
 When(/^I enter "([^"]*)" in the search box$/) do |searchArg|
 	fill_in('searchtext', :with => searchArg)
 end
