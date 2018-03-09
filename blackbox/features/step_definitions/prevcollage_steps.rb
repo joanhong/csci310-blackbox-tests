@@ -8,9 +8,9 @@ When(/^I enter "([^"]*)" in the initial page search box$/) do |arg1|
   fill_in('searchtext', :with => arg1)
 end
 
-When(/^I press the Build Collage button$/) do
-  click_button('searchbutton')
-end
+#When(/^I press the Build Collage button$/) do
+#  click_button('searchbutton')
+#end
 
 When(/^I see the collage page with "([^"]*)"$/) do |arg1|
   expect(page).to have_content(arg1)

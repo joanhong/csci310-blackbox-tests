@@ -1,7 +1,3 @@
-Given(/^I am on the initial page$/) do
-	visit "http://localhost:8081/CS310-ProjectOne/index.jsp"
-end
-
 When(/^I enter "([^"]*)" in the search box$/) do |searchArg|
 	fill_in('searchtext', :with => searchArg)
 end
@@ -47,22 +43,46 @@ Then(/^the search box has a dark gray outline$/) do
 	find('[id=searchtext]').native.css_value('border').should == '2px solid rgb(119, 119, 119)'
 end
 
-And(/^the search box is centered in the middle of the page$/) do
+#And(/^the search box is centered in the middle of the page$/) do
+#
+#end
 
-end
-
-And(/^the search box has prompt text “Enter topic” in very light grey$/) do
-	find('[id=searchtext]')['placeholder'].should == 'Enter topic'
-	find('[id=searchtext]')['::placeholder'].native.css_value('color').should == 'rgba(0, 0, 0, 1)'
-end
+#And(/^the search box has prompt text “Enter topic” in very light grey$/) do
+#	find('[id=searchtext]')['placeholder'].should == 'Enter topic'
+#	find('[id=searchtext]')['::placeholder'].native.css_value('color').should == 'rgba(0, 0, 0, 1)'
+#end
 
 And(/^the search box has white background color$/) do
 	find('[id=searchtext]').native.css_value('background-color').should == 'rgba(255, 255, 255, 1)'
 end
 
-Then(/^the prompt text should disappear$/) do
-	find('[id=searchtext]').should have_no_content("Enter topic")
+#Then(/^the prompt text should disappear$/) do
+#	find('[id=searchtext]').should have_no_content("Enter topic")
+#end
+	
+And(/^press Enter in the search box$/) do
+  find_by_id("searchbutton").native.send_keys(:return)
 end
+
+Then(/^the Build Collage button should be dark grey$/) do
+  find('[id=searchbutton]').native.css_value('background-color').should == 'rgba(119, 119, 119, 1)'
+end
+
+#Then(/^be to the right of the input box$/) do
+  
+#end
+
+Then(/^should be labeled with text that says "([^"]*)"$/) do |arg1|
+  expect(find_by_id('searchbutton')['innerHTML']==arg1)
+end
+
+Then(/^the text color should be white$/) do
+   page.evaluate_script('$("button").css("color")').should == 'rgb(255, 255, 255)'
+end
+
+
+
+
 
 
 
