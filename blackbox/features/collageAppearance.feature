@@ -9,9 +9,9 @@ Background:
 	#Then the collage should have a rectangular shape with all photos contained in the shape
 	#And the collage should have no empty space
 
-#Scenario: Collage location (LOCATION OMIT)
-	#And the collage should be centered in the page
-	#And the collage should appear under the collage title
+Scenario: Collage location (LOCATION OMIT)
+	And the collage should be centered in the page
+	And the collage should appear under the collage title
 
 #Scenario: Collage size
 #	Then the collage should be between 40 and 70% of the browser viewport width, but not less than 800 pixels 
