@@ -1,3 +1,7 @@
+Given(/^I am on the initial page$/) do
+	visit "http://localhost:8081/CS310-ProjectOne/index.jsp"
+end
+
 When(/^I enter "([^"]*)" in the search box$/) do |searchArg|
 	fill_in('searchtext', :with => searchArg)
 end
@@ -79,6 +83,54 @@ end
 Then(/^the text color should be white$/) do
    page.evaluate_script('$("button").css("color")').should == 'rgb(255, 255, 255)'
 end
+
+
+Then(/^the title should be at the top of the page$/) do
+	titlePos = page.driver.evaluate_script <<-EOS
+		function() {
+			var ele = document.getElementById('title');
+			var rect = ele.getBoundingClientRect();
+			return rect.top;
+		}();
+	EOS
+	collagePos = page.driver.evaluate_script <<-EOS
+		function() {
+			var ele = document.getElementById('main');
+			var rect = ele.getBoundingClientRect();
+			return rect.top;
+		}();
+	EOS
+	
+	if (collagePos > titlePos)
+		puts('PASS')
+	end
+end
+
+Then(/^the search box is centered in the middle of the page$/) do
+	find('[id=inputdiv]').native.css_value('text-align').should == 'center'		
+end
+
+Then(/^the Build Collage Button should be to the right of the input box$/) do
+	buttonPos = page.driver.evaluate_script <<-EOS
+		function() {
+			var ele = document.getElementById('searchbutton');
+			var rect = ele.getBoundingClientRect();
+			return rect.left;
+		}();
+	EOS
+	inputBoxPos = page.driver.evaluate_script <<-EOS
+		function() {
+			var ele = document.getElementById('searchtext');
+			var rect = ele.getBoundingClientRect();
+			return rect.left;
+		}();
+	EOS
+
+	if (buttonPos > inputBoxPos)
+		puts('PASS')
+	end
+end
+
 
 
 

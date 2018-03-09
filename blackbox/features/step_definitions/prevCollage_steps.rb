@@ -35,6 +35,12 @@ And(/^the clicked "([^']*)" collage should be scaled up$/) do |arg1|
 end
 
 And(/^the collage picker should be at the bottom of the page$/) do
+	collagePickerPos = page.driver.evaluate_script("document.getElementById('prev').getBoundingClientRect().top;")
+	inputBoxPos = page.driver.evaluate_script("document.getElementById('searchtext').getBoundingClientRect().top;")
+	
+	if (collagePickerPos > inputBoxPos)
+		puts('PASS')
+	end
 end
 
 And(/^the "([^']*)" collage should not be displayed in the collage picker$/) do |arg1|
@@ -83,7 +89,6 @@ end
 Then(/^I should see a scroll bar on the previously created collages$/) do
   find('prev').native.css_value("overflow").should == "auto"
 end
-
 
 
 
