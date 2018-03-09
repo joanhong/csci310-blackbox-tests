@@ -75,7 +75,48 @@ Then(/^the prompt text should disappear$/) do
   expect(find_field("searchtext")['value']).to eq 'a'
 end
 
+Then (/^Build Another Collage button should appear underneath the collage$/) do
+  	collageButtonPos = page.driver.evaluate_script <<-EOS
+		function() {
+			var ele = document.getElementById('searchbutton');
+			var rect = ele.getBoundingClientRect();
+			return rect.top;
+		}();
+	EOS
 
+	collagePos = page.driver.evaluate_script <<-EOS
+		function() {
+			var ele = document.getElementById('main');
+			var rect = ele.getBoundingClientRect();
+			return rect.top;
+		}();
+	EOS
+
+	if (collageButtonPos > collagePos)
+		puts('PASS');
+	end
+end
+
+AND (/^slightly to the right of the center$/) do
+	collageButtonPos = page.driver.evaluate_script<<-EOS
+		function() {
+			var ele = document.getElementById('searchbutton');
+			var rect = ele.getBoundingClientRect();
+			return rect.left;
+		}();
+	EOS
+
+	windowWidth = page.driver.evaluate_script<<-EOS
+		function() {
+			var ele = window.innerWidth/2;
+			return ele;
+		}();
+	EOS
+
+	if (collageButtonPos > windowWidth)
+		puts('PASS')
+	end
+end
 
 #Then(/^I should see the collage page with a collage for topic "([^"]*)"$/) do |arg1|
 #  expect(page).to have_content(arg1)
