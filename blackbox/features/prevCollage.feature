@@ -17,4 +17,3 @@ Scenario:
 Scenario:
   When I create 10 collages
   Then I should see a scroll bar on the previously created collage
-

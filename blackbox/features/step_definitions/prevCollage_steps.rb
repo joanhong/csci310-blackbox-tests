@@ -5,9 +5,6 @@ Given(/^I am on the collage page$/) do
   sleep 30
 end
 
-
-#==========================================================================
-
 When(/^I enter "([^"]*)" in the collage page search box$/) do |searchArg|
   fill_in('searchtext', :with => searchArg)
 end
@@ -48,31 +45,39 @@ end
 When(/^I create 10 collages$/) do 
   fill_in('searchtext', :with => "computer")
   click_button("searchbutton")
+  sleep 10
   fill_in('searchtext', :with => "fish")
   click_button("searchbutton")
+  sleep 10
   fill_in('searchtext', :with => "google")
   click_button("searchbutton")
+  sleep 10
   fill_in('searchtext', :with => "mountain")
   click_button("searchbutton")
+  sleep 10
   fill_in('searchtext', :with => "orange")
   click_button("searchbutton")
+  sleep 10
   fill_in('searchtext', :with => "red")
   click_button("searchbutton")
+  sleep 10
   fill_in('searchtext', :with => "rock")
   click_button("searchbutton")
+  sleep 10
   fill_in('searchtext', :with => "space")
   click_button("searchbutton")
+  sleep 10
   fill_in('searchtext', :with => "ucla")
   click_button("searchbutton")
+  sleep 10
   fill_in('searchtext', :with => "usc")
   click_button("searchbutton")
+  sleep 10
 end
 
 Then(/^I should see a scroll bar on the previously created collages$/) do
   find('prev').native.css_value("overflow").should == "auto"
 end
-
-
 
 
 
